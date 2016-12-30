@@ -1,0 +1,7 @@
+q query1 foo AND bar
+q query2 bar AND baz
+d doc1 this document contains the words foo and bar only
+d doc2 this document, on the other hand, mentions bar and baz.
+d doc3 this one goes nuts and mentions foo, bar and baz -- all three!
+d doc4 finally, this one mentions none of those words.
+quit
