@@ -2,7 +2,7 @@
 
 Inspired by the [Samza-Luwak Proof of Concept](https://github.com/romseygeek/samza-luwak) here's a version that uses [Kafka Streams](http://docs.confluent.io/3.0.0/streams/)
 
-Right now it is really simple, using a simple filter DSL to filter an input topic only letting items through that match 1 or more query using Luwak.
+The demo is really simple, using a simple filter DSL to filter an input topic only letting items through that match 1 or more query using Luwak.
 
                         +----------+
                         |          |
