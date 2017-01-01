@@ -12,7 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<kafka.version>0.10.0.0-cp1</kafka.version>
+	<kafka.version>0.10.0.1</kafka.version>
   	<kafka.scala.version>2.11</kafka.scala.version>
   </properties>
 
@@ -44,6 +44,11 @@
 	  <groupId>com.github.flaxsearch</groupId>
 	  <artifactId>luwak</artifactId>
 	  <version>1.4.0</version>
+	</dependency>
+	<dependency>
+	  <groupId>net.sourceforge.argparse4j</groupId>
+	  <artifactId>argparse4j</artifactId>
+	  <version>0.7.0</version>
 	</dependency>
   </dependencies>
   

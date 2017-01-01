@@ -1,0 +1,2 @@
+query1,foo AND bar
+query2,bar AND baz

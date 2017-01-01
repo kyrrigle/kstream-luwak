@@ -1,0 +1,4 @@
+doc1,this document contains the words foo and bar only
+doc2,this document, on the other hand, mentions bar and baz.
+doc3,this one goes nuts and mentions foo, bar and baz -- all three!
+doc4,finally, this one mentions none of those words.
