@@ -43,8 +43,8 @@ public class KStreamLuwakPlusExample {
         KStreamBuilder builder = new KStreamBuilder();
 
         StateStoreSupplier queryStore = Stores.create("Queries")
-                .withKeys(Serdes.String())
-                .withValues(Serdes.String())
+                .withStringKeys()
+                .withStringValues()
                 .persistent()
                 .build();
 

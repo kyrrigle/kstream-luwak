@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 public class QueryProcessor implements Processor<String, String> {
 	public static final Logger logger = LoggerFactory.getLogger(QueryProcessor.class);
-	private ProcessorContext context;
 	private KeyValueStore<String, String> kvStore;
 	private FilteringMonitor monitor;
 	private boolean initialized;
@@ -23,22 +22,21 @@ public class QueryProcessor implements Processor<String, String> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public void init(ProcessorContext context) {
-		// keep the processor context locally because we need it in punctuate() and commit()
-		this.context = context;
-
-		// call this processor's punctuate() method every 1000 time units.
-		this.context.schedule(1000);
-
-		// retrieve the key-value store named "Counts"
+		// retrieve the key-value store named "Queries"
 		kvStore = (KeyValueStore<String, String>) context.getStateStore("Queries");
-		
+		if (kvStore == null) {
+			logger.error("Failed to get my kv store");
+			return;
+		}
+
+		logger.info("Loading queries from kv store");
 		KeyValueIterator<String, String> iter = this.kvStore.all();
 		while (iter.hasNext()) {
 			KeyValue<String, String> entry = iter.next();
-			logger.info("QT Key: {} Value: {} ", entry.key, entry.value);
 			monitor.addQuery(entry.key, entry.value);
 		}
 		iter.close();
+		logger.info("Initialized and ready to go");
 		initialized = true;
 	}
 
@@ -48,6 +46,7 @@ public class QueryProcessor implements Processor<String, String> {
 
 	@Override
 	public void process(String query_id, String query_query) {
+		// save it for later and forward on to the monitor
 		kvStore.put(query_id, query_query);
 		monitor.addQuery(query_id, query_query);
 	}
