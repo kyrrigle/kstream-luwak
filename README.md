@@ -69,6 +69,8 @@ To run the demo:
 ##Plus Example
 In addition to the above "basic" there is a "plus" version that introduces a second input topic for the queries and leaves the input queue for documents only.  Additionaly now the topic items need to have proper keys which are used as the corresponding id for luwak.
 
+For this version I wanted to be able to scale out the search part while having a single set of queries that will persist between runs (and be restored when a new instance starts up).  The best way I could find to achieve this was to have a second Kafka Stream application for the queries that starts up with a node-specific application id (currently appending the hostname) and a single topic partition. This application uses a [state store](http://docs.confluent.io/3.0.0/streams/developer-guide.html#defining-a-state-store) to keep track of the queries seen.  Not sure this is the *best* way to achieve this but it seems to work. YMMV
+
 To run this demo you can also use some bash commandline helpers defined in the set-env.sh script.  First source the file, giving it the path to your confluent install directory:
 
     $ . setup-env.sh /Users/mking/confluent-3.1.1
